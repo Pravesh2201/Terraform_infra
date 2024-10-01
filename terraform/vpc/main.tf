@@ -80,6 +80,12 @@ resource "aws_security_group" "bastion_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+ ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
@@ -98,6 +104,13 @@ resource "aws_security_group" "private_sg" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["10.0.1.0/24"]  # Allow SSH from Bastion subnet
+  }
+
+ ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
